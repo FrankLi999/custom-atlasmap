@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://www.optus.com.au/WSG/ec/">
+   <soapenv:Header>
+      <ec:SoapHeaderMsg>
+         <ec:ContextId>636</ec:ContextId>
+         <ec:DealerId>2202</ec:DealerId>
+         <!--Optional:-->
+         <ec:DealerSubId>7867</ec:DealerSubId>
+         <ec:BillingOption>11</ec:BillingOption>
+      </ec:SoapHeaderMsg>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ec:ReadBalanceRequest>
+         <ec:MSN>100000002</ec:MSN>
+         <!--Optional:-->
+         <ec:EventTime>20210612121212</ec:EventTime>
+      </ec:ReadBalanceRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

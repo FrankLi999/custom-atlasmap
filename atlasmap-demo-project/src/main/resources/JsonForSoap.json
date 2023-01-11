@@ -1,0 +1,12 @@
+{
+	"header": {
+	"distributorId":"2202",
+	"contextId":"Read Balance"
+	},
+	"body" :{
+		"msn":"100020002",
+		"eventTime":"1234134321"
+	
+	}	
+	
+}

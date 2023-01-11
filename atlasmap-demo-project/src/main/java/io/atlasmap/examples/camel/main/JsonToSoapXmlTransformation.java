@@ -1,0 +1,51 @@
+package io.atlasmap.examples.camel.main;
+
+import io.atlasmap.api.AtlasContext;
+import io.atlasmap.api.AtlasContextFactory;
+import io.atlasmap.api.AtlasSession;
+import io.atlasmap.core.DefaultAtlasContextFactory;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class JsonToSoapXmlTransformation {
+
+	public static void main(String args[]) throws Exception {
+		JsonToSoapXmlTransformation m = new JsonToSoapXmlTransformation();
+		m.process();
+	}
+
+	public void process() throws Exception {
+		URL url = Thread.currentThread().getContextClassLoader().getResource("soaptojson.adm");
+		AtlasContextFactory factory = DefaultAtlasContextFactory.getInstance();
+		AtlasContext context = factory.createContext(url.toURI());
+		AtlasSession session = context.createSession();
+
+		url = Thread.currentThread().getContextClassLoader().getResource("SoapRequest.xsd");
+		String source = new String(Files.readAllBytes(Paths.get(url.toURI())));
+		System.out.println("Source document:\n" + source);
+
+		session.setSourceDocument("JSONSchemaSource", source);
+		context.process(session);
+		String targetDoc = (String) session.getTargetDocument("JsonForSoap-d4c9d36d-c1eb-480e-bf58-136fd210302a");
+				System.out.println(targetDoc);
+//		printXML(targetDoc);
+	}
+
+	private void printXML(String targetDoc) throws Exception {
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+		StringWriter writer = new StringWriter();
+		transformer.transform(new StreamSource(new StringReader((String)targetDoc)), new StreamResult(writer));
+		System.out.println("Target Document:\n" + writer.toString());
+	}
+}

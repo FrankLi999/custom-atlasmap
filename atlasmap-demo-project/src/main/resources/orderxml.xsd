@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XmlOE>
+  <Address>
+    <addressLine1>1040 Notexisting St</addressLine1>
+    <city>Westford</city>
+    <state>Massachusetts</state>
+    <zipCode>01886</zipCode>
+  </Address>
+  <Contact>
+    <firstName>Bob</firstName>
+    <lastName>Totton</lastName>
+    <phoneNumber>123-456-7890</phoneNumber>
+    <zipCode>01886</zipCode>
+  </Contact>
+</XmlOE>
